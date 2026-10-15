@@ -4,6 +4,7 @@
  */
 
 #include "mt76.h"
+#include "compat-5.10.h"
 
 static int
 mt76_txq_get_qid(struct ieee80211_txq *txq)
