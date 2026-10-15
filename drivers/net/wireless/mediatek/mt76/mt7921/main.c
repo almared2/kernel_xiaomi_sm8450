@@ -1362,24 +1362,6 @@ static void mt7921_flush(struct ieee80211_hw *hw, struct ieee80211_vif *vif,
 
 
 
-static int mt7921_set_sar_specs(struct ieee80211_hw *hw,
-				const struct cfg80211_sar_specs *sar)
-{
-	struct mt7921_dev *dev = mt7921_hw_dev(hw);
-	struct mt76_phy *mphy = hw->priv;
-	int err;
-
-	mt7921_mutex_acquire(dev);
-	err = mt76_init_sar_power(hw, sar);
-	if (err)
-		goto out;
-
-	err = mt76_connac_mcu_set_rate_txpower(mphy);
-out:
-	mt7921_mutex_release(dev);
-
-	return err;
-}
 
 const struct ieee80211_ops mt7921_ops = {
 	.tx = mt7921_tx,
@@ -1423,7 +1405,6 @@ const struct ieee80211_ops mt7921_ops = {
 	.set_rekey_data = mt7921_set_rekey_data,
 #endif /* CONFIG_PM */
 	.flush = mt7921_flush,
-	.set_sar_specs = mt7921_set_sar_specs,
 };
 EXPORT_SYMBOL_GPL(mt7921_ops);
 
