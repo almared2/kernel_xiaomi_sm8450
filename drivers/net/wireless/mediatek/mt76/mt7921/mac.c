@@ -1363,7 +1363,7 @@ mt7921_vif_connect_iter(void *priv, u8 *mac,
 	struct mt7921_dev *dev = mvif->phy->dev;
 
 	if (vif->type == NL80211_IFTYPE_STATION)
-		ieee80211_disconnect(vif, true);
+		ieee80211_hw_restart_disconnect(vif);
 
 	mt76_connac_mcu_uni_add_dev(&dev->mphy, vif, &mvif->sta.wcid, true);
 	mt7921_mcu_set_tx(dev, vif);
